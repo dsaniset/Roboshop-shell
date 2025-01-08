@@ -13,6 +13,6 @@ cd /usr/share/nginx/html
 
 unzip /tmp/fronend.zip
 
-mv nginx.conf /etc/nginx/
+cp nginx.conf /etc/nginx/
 
 systemctl restart nginx
