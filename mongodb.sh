@@ -1,6 +1,6 @@
-cp mongo.repo /etc/yum.repos.d/
+cp mongo.repo /etc/yum.repos.d/mongo.repo
 
-dnf start mongodb-org -y
+dnf install mongodb-org -y
 
 systemctl enable mongod
 systemctl start mongod
