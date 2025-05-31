@@ -1,4 +1,4 @@
-dnf module diable nodejs -y
+dnf module disable nodejs -y
 dnf module enable nodejs:20 -y
 dnf module start nodejs -y
 
