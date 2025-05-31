@@ -1,5 +1,5 @@
 cp payment.service /etc/systemd/system/payment.service
-dnf module install python3 gcc python3-devel -y
+dnf install python3 gcc python3-devel -y
 
 useradd roboshop
 
