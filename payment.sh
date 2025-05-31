@@ -11,6 +11,6 @@ unzip /tmp/payment.zip
 
 pip3 install -r requirements.txt
 
-systemctl daemon-restart
+systemctl daemon-reload
 systemctl enable payment
 systemctl restart payment
