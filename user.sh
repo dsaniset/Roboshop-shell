@@ -2,6 +2,8 @@ dnf module disable nodejs -y
 dnf module enable nodejs:20 -y
 dnf install nodejs -y
 
+cp user.service /etc/systemd/system/
+
 useradd roboshop
 
 mkdir /app
@@ -12,12 +14,9 @@ cd /app
 
 unzip /tmp/user.zip
 
-cd /app
 npm install
-
-cp user.service /etc/systemd/system/
 
 systemctl daemon-reload
 
 systemctl enable nodejs
-systemctl start nodejs
+systemctl restart nodejs

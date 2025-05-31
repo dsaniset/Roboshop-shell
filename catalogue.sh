@@ -15,11 +15,11 @@ unzip /tmp/catalogue.zip
 
 npm install
 
+dnf install mongodb-mongosh -y
+
+mongosh --host mongodb.devops24.shop </app/db/master-data.js
+
 systemctl daemon-reload
 
 systemctl enable catalogue
 systemctl restart catalogue
-
-dnf install mongodb-mongosh -y
-
-mongosh --host MONGODB-SERVER-IPADDRESS </app/db/master-data.js
