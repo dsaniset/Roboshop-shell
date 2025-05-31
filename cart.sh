@@ -2,6 +2,8 @@ dnf module diable nodejs -y
 dnf module enable nodejs:20 -y
 dnf module start nodejs -y
 
+cp cart.service /tmp/systemd/system/cart.service
+
 useradd roboshop
 
 mkdir /app
@@ -12,13 +14,9 @@ cd /app
 
 unzip /tmp/cart.zip
 
-cd /app
-
 npm install
-
-cp cart.service /tmp/systemd/system/
 
 systemctl daemon-reload
 
-systemctl enable nodejs
-systemctl start nodejs
+systemctl enable cart
+systemctl restart cart
