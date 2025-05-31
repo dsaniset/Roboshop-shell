@@ -1,6 +1,6 @@
 dnf module disable nodejs -y
 dnf module enable nodejs:20 -y
-dnf module start nodejs -y
+dnf module install nodejs -y
 
 cp cart.service /tmp/systemd/system/cart.service
 
