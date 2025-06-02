@@ -3,7 +3,7 @@ no_color="\e[0m"
 script_path=$(pwd)
 
 print_heading(){
-  echo -e "$color &1 $no_color"
+  echo -e "$color $1 $no_color"
 }
 
 app_prerequisite(){
