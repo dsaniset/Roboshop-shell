@@ -9,6 +9,7 @@ print_heading(){
 app_prerequisite(){
   useradd roboshop
   mkdir /app
+  print_heading "Downloading $app_name application"
   curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip
   cd /app
   unzip /tmp/$app_name.zip
@@ -21,7 +22,7 @@ nodejs_setup(){
   print_heading "Enabling and installing nodejs"
   dnf module disable nodejs -y
   dnf module enable nodejs:20 -y
-  dnf module install nodejs -y
+  dnf install nodejs -y
 
   app_prerequisite
 
