@@ -1,23 +1,23 @@
-cp shipping.service /etc/systemd/system/shipping.service
+source common.sh
+app_name=shipping
+
+print_heading "Setting up systemd service"
+cp $app_name.service /etc/systemd/system/$app_name.service
+
+print_heading "Installing maven"
 dnf install maven -y
 
-useradd roboshop
+app_prerequisite
 
-mkdir /app
-
-curl -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-cd /app
-unzip /tmp/shipping.zip
-
+print_heading "Building application"
 mvn clean package
-mv target/shipping-1.0.jar shipping.jar
+mv target/$app_name-1.0.jar $app_name.jar
 
+print_heading "Installing mysql"
 dnf install mysql -y
 
-mysql -h mysql.devops24.shop -uroot -pRoboShop@1 < /app/db/schema.sql
-mysql -h mysql.devops24.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
-mysql -h mysql.devops24.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
-
-systemctl daemon-reload
-systemctl enable shipping
-systemctl restart shipping
+print_heading "Loading SQL schemas"
+for sql in schema app-user master-data
+do
+  mysql -h mysql.devops24.shop -uroot -pRoboShop@1 < /app/db/$sql.sql
+done

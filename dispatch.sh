@@ -1,29 +1,29 @@
 source common.sh
 
-echo -e "$color Copying the dispatch.service $no_color"
+print_heading "Copying the dispatch.service"
 cp dispatch.service /etc/systemd/system/dispatch.service
 
-echo -e "$color installing GoLang $no_color "
+print_heading "Installing GoLang"
 dnf install golang -y
 
-echo -e "$color Added application user $no_color "
+print_heading "Added application user"
 useradd roboshop
 
-echo -e "$color Created application folder $no_color "
+print_heading "Created application folder"
 rm -rf /app
 mkdir /app
 
-echo -e "$color Downloading the application $no_color "
+print_heading "Downloading the application"
 curl -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip
 cd /app
 unzip /tmp/dispatch.zip
 
-echo -e "$color Downloading the dependencies $no_color "
+print_heading "Downloading the dependencies"
 go mod init dispatch
 go get
 go build
 
-echo -e "$color Starting the application $no_color "
+print_heading "Starting the application"
 systemctl daemon-reload
 systemctl enable dispatch
 systemctl restart dispatch
