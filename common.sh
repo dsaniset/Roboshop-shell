@@ -8,6 +8,7 @@ print_heading(){
 
 app_prerequisite(){
   useradd roboshop
+  rm -rf /app
   mkdir /app
   print_heading "Downloading $app_name application"
   curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip
