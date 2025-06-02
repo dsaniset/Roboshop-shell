@@ -15,13 +15,17 @@ app_prerequisite(){
 }
 
 nodejs_setup(){
+  print_heading "Setting up systemd service"
   cp $script_path/$app_name.service /etc/systemd/system/$app_name.service
+
+  print_heading "Enabling and installing nodejs"
   dnf module disable nodejs -y
   dnf module enable nodejs:20 -y
   dnf module install nodejs -y
 
   app_prerequisite
 
+  print_heading "Installing application dependencies"
   npm install
 
   system_restart
