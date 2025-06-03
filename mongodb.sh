@@ -14,6 +14,6 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log_file
 status_check $?
 
 print_heading "Starting mongodb service"
-systemctl enable $app_name &>>$log_file
-systemctl restart $app_name &>>$log_file
+systemctl enable mongod &>>$log_file
+systemctl restart mongod &>>$log_file
 status_check $?
