@@ -10,7 +10,7 @@ dnf install mongodb-org -y &>>$log_file
 status_check $?
 
 print_heading "Editing the inbound rule"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/$app_name.conf &>>$log_file
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log_file
 status_check $?
 
 print_heading "Starting mongodb service"

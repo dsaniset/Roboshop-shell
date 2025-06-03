@@ -22,7 +22,7 @@ rm -rf /usr/share/nginx/html/*
 print_heading "Downloading Application"
 curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
 cd /usr/share/nginx/html
-unzip /tmp/$app_name.zip
+unzip /tmp/$app_name.zip &>>$log_file
 status_check $?
 
 print_heading "Starting Nginx service"
