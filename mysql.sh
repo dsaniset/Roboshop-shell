@@ -6,8 +6,8 @@ dnf install mysql-server -y &>>$log_file
 status_check $?
 
 print_heading "Starting mysql service"
-systemctl enable $app_name &>>$log_file
-systemctl start $app_name &>>$log_file
+systemctl enable mysqld &>>$log_file
+systemctl start mysqld &>>$log_file
 status_check $?
 
 print_heading "Secure installation"
