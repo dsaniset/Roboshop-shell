@@ -34,7 +34,7 @@ app_prerequisite(){
   print_heading "Downloading $app_name application"
   curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
   cd /app
-  unzip /tmp/$app_name.zip
+  unzip /tmp/$app_name.zip &>>$log_file
   status_check $?
 }
 

@@ -4,7 +4,7 @@ app_name="catalogue"
 nodejs_setup
 
 print_heading "Setting up mongodb setup file"
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
+cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
 status_check $?
 
 print_heading "Installing mongodb"
