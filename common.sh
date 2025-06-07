@@ -24,8 +24,8 @@ app_prerequisite(){
   if [ $? -ne 0 ]; then
     echo -e "$color No such user hence creating one $no_color"
     useradd roboshop &>>$log_file
+    status_check $?
   fi
-  status_check $?
 
   if [ ! -f /tmp/$app_name.zip ]; then
     print_heading "Downloading $app_name application"
