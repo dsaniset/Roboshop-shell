@@ -22,9 +22,18 @@ app_prerequisite(){
   print_heading "Creating user"
   id roboshop &>>$log_file
   if [ $? -ne 0 ]; then
+    echo -e "$color No such user hence creating one $no_color"
     useradd roboshop &>>$log_file
   fi
   status_check $?
+
+  if [ ! -f /tmp/$app_name.zip ]; then
+    print_heading "Downloading $app_name application"
+    curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
+    status_check $?
+  else
+    print_heading "$app_name.zip already exists, skipping download"
+  fi
 
   print_heading "Creating application folder"
   rm -rf /app
@@ -37,22 +46,10 @@ app_prerequisite(){
 #  unzip /tmp/$app_name.zip &>>$log_file
 #  status_check $?
 
-  if [ ! -f /tmp/$app_name.zip ]; then
-    print_heading "Downloading $app_name application"
-    curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
-    status_check $?
-  else
-    print_heading "$app_name.zip already exists, skipping download"
-  fi
-
-  if [ -z "$(ls -A /app)" ]; then
-    print_heading "Unzipping $app_name.zip to /app"
-    unzip -n /tmp/$app_name.zip -d /app &>>$log_file
-    status_check $?
-  else
-    print_heading "/app already has files, skipping unzip"
-  fi
-
+  print_heading "unzipping $app_name application"
+  cd /app
+  unzip /tmp/$app_name.zip &>>$log_file
+  status_check $?
 }
 
 nodejs_setup(){
