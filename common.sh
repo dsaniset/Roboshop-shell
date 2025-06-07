@@ -2,7 +2,7 @@ color="\e[35m"
 no_color="\e[0m"
 log_file=/tmp/roboshop.log
 rm -f $log_file
-script_path=$(pwd)
+script_path=$(dirname "${BASH_SOURCE[0]}")
 
 print_heading(){
   echo -e "$color $1 $no_color"
