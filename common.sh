@@ -10,7 +10,7 @@ print_heading(){
 }
 
 status_check(){
-  if [ $1 -ne 0 ]; then
+  if [ $1 -eq 0 ]; then
     echo -e "\e[32m SUCCESS \e[0m"
   else
     echo -e "\e[31m FAILURE \e[0m"
@@ -21,7 +21,7 @@ status_check(){
 app_prerequisite(){
   print_heading "Creating user"
   id roboshop &>>$log_file
-  if [ $? -eq 0 ]; then
+  if [ $? -ne 0 ]; then
     useradd roboshop &>>$log_file
   fi
   status_check $?
