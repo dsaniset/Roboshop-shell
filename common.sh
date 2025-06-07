@@ -53,13 +53,9 @@ app_prerequisite(){
     print_heading "/app already has files, skipping unzip"
   fi
 
-
 }
 
 nodejs_setup(){
-  print_heading "Setting up systemd service"
-  cp $script_path/$app_name.service /etc/systemd/system/$app_name.service &>>$log_file
-  status_check $?
 
   print_heading "Enabling and installing nodejs"
   dnf module disable nodejs -y &>>$log_file
@@ -77,6 +73,10 @@ nodejs_setup(){
 }
 
 system_restart(){
+  print_heading "Setting up systemd service"
+  cp $script_path/$app_name.service /etc/systemd/system/$app_name.service &>>$log_file
+  status_check $?
+
   print_heading "Reloading systemd and restarting the service"
   systemctl daemon-reload &>>$log_file
   systemctl enable $app_name &>>$log_file
